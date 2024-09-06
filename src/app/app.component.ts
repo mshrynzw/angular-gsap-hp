@@ -66,7 +66,26 @@ export class AppComponent implements OnInit {
       .set('.header, .home-main', { display: 'none' })
       .set('.features-main, app-footer', { display: 'block', opacity: 0 })
       .to('.features-main', { opacity: 1, duration: 0.5 })
-      .to('app-footer', { opacity: 1, duration: 0.5 }, '-=0.3');
+      .from('.features-section h2', { opacity: 0, y: -50, duration: 0.5 })
+      .from('.feature:nth-child(1)', { 
+        opacity: 0, 
+        x: '-100%', 
+        duration: 0.8, 
+        ease: 'power3.out' 
+      }, '-=0.3')
+      .from('.feature:nth-child(2)', { 
+        opacity: 0, 
+        y: '100%', 
+        duration: 0.8, 
+        ease: 'power3.out' 
+      }, '-=0.5')
+      .from('.feature:nth-child(3)', { 
+        opacity: 0, 
+        x: '100%', 
+        duration: 0.8, 
+        ease: 'power3.out' 
+      }, '-=0.5')
+      .from('app-footer', { y: 20, opacity: 0, duration: 0.5 }, '-=0.3');
   }
 
   showHome() {
