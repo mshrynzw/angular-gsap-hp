@@ -7,14 +7,17 @@ import { gsap } from 'gsap';
   template: `
     <footer class="bg-gray-800 text-white py-8">
       <div class="container mx-auto px-6">
-        <div class="flex justify-between items-center">
-          <p>&copy; 2023 クールなホームページ. All rights reserved.</p>
+        <div class="flex flex-col md:flex-row justify-between items-center">
+          <p class="mb-4 md:mb-0">&copy; 2023 クールなホームページ. All rights reserved.</p>
           <div class="space-x-4">
             <button (click)="onHomeClick()" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
               ホーム
             </button>
-            <button (click)="onContactClick()" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
-              お問い合わせ
+            <button (click)="onFeaturesClick()" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
+              特徴
+            </button>
+            <button (click)="onBlogClick()" class="bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded">
+              ブログ
             </button>
           </div>
         </div>
@@ -25,7 +28,8 @@ import { gsap } from 'gsap';
 })
 export class FooterComponent implements OnInit {
   @Output() homeClicked = new EventEmitter<void>();
-  @Output() contactClicked = new EventEmitter<void>();
+  @Output() featuresClicked = new EventEmitter<void>();
+  @Output() blogClicked = new EventEmitter<void>();
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
@@ -43,7 +47,11 @@ export class FooterComponent implements OnInit {
     this.homeClicked.emit();
   }
 
-  onContactClick() {
-    this.contactClicked.emit();
+  onFeaturesClick() {
+    this.featuresClicked.emit();
+  }
+
+  onBlogClick() {
+    this.blogClicked.emit();
   }
 }

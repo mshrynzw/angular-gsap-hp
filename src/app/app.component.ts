@@ -1,19 +1,26 @@
 import { Component, OnInit, PLATFORM_ID, Inject } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { HomeComponent } from './home/home.component';
 import { FeaturesComponent } from './features/features.component';
+// import { ContactComponent } from './contact/contact.component';
+import { BlogComponent } from './blog/blog.component';
 import { FooterComponent } from './footer/footer.component';
+
+gsap.registerPlugin(ScrollTrigger);
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   standalone: true,
-  imports: [CommonModule, HomeComponent, FeaturesComponent, FooterComponent]
+  imports: [CommonModule, HomeComponent, FeaturesComponent, BlogComponent, FooterComponent]
 })
 export class AppComponent implements OnInit {
   showFeatures = false;
+  showContact = false;
+  showBlog = false;
   isAnimating = false;
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
@@ -102,5 +109,31 @@ export class AppComponent implements OnInit {
       .set('.header, .home-main', { display: 'block', opacity: 0 })
       .to('.header', { opacity: 1, duration: 0.5 })
       .to('.home-main', { opacity: 1, duration: 0.5 }, '-=0.3');
+  }
+
+  showBlogAnimation() {
+    this.isAnimating = true;
+    const tl = gsap.timeline({
+      onComplete: () => {
+        this.isAnimating = false;
+        if (isPlatformBrowser(this.platformId)) {
+          ScrollTrigger.refresh();
+        }
+      }
+    });
+
+    tl.to('.header, .home-main, .features-main, .contact-main', { opacity: 0, duration: 0.5 })
+      .set('.header, .home-main, .features-main, .contact-main', { display: 'none' })
+      .set('.blog-main', { display: 'block', opacity: 0 })
+      .to('.blog-main', { opacity: 1, duration: 0.5 })
+      .call(() => {
+        this.showFeatures = false;
+        this.showContact = false;
+        this.showBlog = true;
+      });
+
+    if (!this.showFeatures && !this.showContact && !this.showBlog) {
+      gsap.to('app-footer', { opacity: 1, y: 0, duration: 1.5, delay: 1.5 });
+    }
   }
 }

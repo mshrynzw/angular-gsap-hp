@@ -1,5 +1,5 @@
 <div class="min-h-screen bg-gray-100 flex flex-col">
-  <header class="header bg-white shadow-md" [style.display]="showFeatures ? 'none' : 'block'">
+  <header class="header bg-white shadow-md" [style.display]="showContact || showBlog ? 'none' : 'block'">
     <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
       <h1 class="text-xl font-bold text-gray-800">クールなホームページ</h1>
       <div class="hidden md:flex space-x-4">
@@ -7,23 +7,28 @@
           {{ showFeatures ? 'ホーム' : '特徴' }}
         </a>
         <a href="#" class="text-gray-600 hover:text-gray-800" (click)="onContactClick()">お問い合わせ</a>
+        <a href="#" class="text-gray-600 hover:text-gray-800" (click)="showBlogAnimation()">ブログ</a>
       </div>
     </nav>
   </header>
 
   <main class="flex-grow">
-    <div class="home-main container mx-auto px-6 py-12" [style.display]="showFeatures ? 'none' : 'block'">
+    <div class="home-main container mx-auto px-6 py-12" [style.display]="!showFeatures && !showContact && !showBlog ? 'block' : 'none'">
       <app-home></app-home>
     </div>
 
     <div class="features-main container mx-auto px-6 py-12" [style.display]="showFeatures ? 'block' : 'none'">
       <app-features></app-features>
     </div>
+
+    <div class="blog-main container mx-auto px-6 py-12" [style.display]="showBlog ? 'block' : 'none'">
+      <app-blog></app-blog>
+    </div>
   </main>
 
   <app-footer
-    [style.display]="showFeatures ? 'block' : 'none'"
+    [style.display]="'block'"
     (homeClicked)="onHomeClick()"
-    (contactClicked)="onContactClick()">
+    (blogClicked)="showBlogAnimation()">
   </app-footer>
 </div>
