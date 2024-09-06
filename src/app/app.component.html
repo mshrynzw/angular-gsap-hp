@@ -1,42 +1,29 @@
-<div class="min-h-screen bg-gray-100">
-  <header class="header bg-white shadow-md">
+<div class="min-h-screen bg-gray-100 flex flex-col">
+  <header class="header bg-white shadow-md" [style.display]="showFeatures ? 'none' : 'block'">
     <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
       <h1 class="text-xl font-bold text-gray-800">クールなホームページ</h1>
       <div class="hidden md:flex space-x-4">
-        <a href="#" class="text-gray-600 hover:text-gray-800">ホーム</a>
-        <a href="#" class="text-gray-600 hover:text-gray-800">特徴</a>
-        <a href="#" class="text-gray-600 hover:text-gray-800">お問い合わせ</a>
+        <a href="#" class="text-gray-600 hover:text-gray-800" (click)="toggleFeatures()">
+          {{ showFeatures ? 'ホーム' : '特徴' }}
+        </a>
+        <a href="#" class="text-gray-600 hover:text-gray-800" (click)="onContactClick()">お問い合わせ</a>
       </div>
     </nav>
   </header>
 
-  <main class="container mx-auto px-6 py-12">
-    <div class="flex flex-col md:flex-row items-center mb-12">
-      <div class="hero-text md:w-1/2 mb-8 md:mb-0">
-        <h2 class="text-4xl font-bold text-gray-800 mb-4">素晴らしいウェブサイトへようこそ</h2>
-        <p class="text-xl text-gray-600 mb-6">GSAPとAngular、Tailwind CSSで作成された驚くべきアニメーション付きのホームページです。</p>
-        <button class="cta-button bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full transition duration-300">
-          詳細を見る
-        </button>
-      </div>
-      <div class="hero-image md:w-1/2">
-        <img src="https://via.placeholder.com/500x300" alt="Hero image" class="rounded-lg shadow-lg">
-      </div>
+  <main class="flex-grow">
+    <div class="home-main container mx-auto px-6 py-12" [style.display]="showFeatures ? 'none' : 'block'">
+      <app-home></app-home>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      <div class="feature bg-white p-6 rounded-lg shadow-md">
-        <h3 class="text-xl font-semibold text-gray-800 mb-2">高速</h3>
-        <p class="text-gray-600">最適化されたパフォーマンスで、ユーザーに最高の体験を提供します。</p>
-      </div>
-      <div class="feature bg-white p-6 rounded-lg shadow-md">
-        <h3 class="text-xl font-semibold text-gray-800 mb-2">レスポンシブ</h3>
-        <p class="text-gray-600">あらゆるデバイスで完璧に動作するデザインです。</p>
-      </div>
-      <div class="feature bg-white p-6 rounded-lg shadow-md">
-        <h3 class="text-xl font-semibold text-gray-800 mb-2">モダン</h3>
-        <p class="text-gray-600">最新のウェブ技術を使用して構築されています。</p>
-      </div>
+    <div class="features-main container mx-auto px-6 py-12" [style.display]="showFeatures ? 'block' : 'none'">
+      <app-features></app-features>
     </div>
   </main>
+
+  <app-footer
+    [style.display]="showFeatures ? 'block' : 'none'"
+    (homeClicked)="onHomeClick()"
+    (contactClicked)="onContactClick()">
+  </app-footer>
 </div>
