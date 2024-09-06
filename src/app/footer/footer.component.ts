@@ -5,19 +5,22 @@ import { gsap } from 'gsap';
 @Component({
   selector: 'app-footer',
   template: `
-    <footer class="bg-gray-800 text-white py-8">
+    <footer class="fixed bottom-0 left-0 right-0 py-8 border-t border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-800 z-10">
       <div class="container mx-auto px-6">
-        <div class="flex flex-col md:flex-row justify-between items-center">
-          <p class="mb-4 md:mb-0">&copy; 2023 クールなホームページ. All rights reserved.</p>
-          <div class="space-x-4">
-            <button (click)="onHomeClick()" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
-              ホーム
+        <div class="flex flex-col md:flex-row justify-between items-center text-gray-700 dark:text-white">
+          <p class="mb-4 md:mb-0">&copy; 2023 CoolHomepage. All rights reserved.</p>
+          <div class="flex space-x-4">
+            <button (click)="onHomeClick()" class="text-center">
+              <h6 class="text-lg font-semibold">Home</h6>
+              <p class="mt-2 text-sm text-gray-500">Top page</p>
             </button>
-            <button (click)="onFeaturesClick()" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
-              特徴
+            <button (click)="onFeaturesClick()" class="text-center">
+              <h6 class="text-lg font-semibold">Features</h6>
+              <p class="mt-2 text-sm text-gray-500">Detail</p>
             </button>
-            <button (click)="onBlogClick()" class="bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded">
-              ブログ
+            <button (click)="onBlogClick()" class="text-center">
+              <h6 class="text-lg font-semibold">Blog</h6>
+              <p class="mt-2 text-sm text-gray-500">Dairy news</p>
             </button>
           </div>
         </div>
